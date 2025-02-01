@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+    <div class="flex items-center mb-6">
+        <a href="{{ url_for('get_songs') }}" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 mr-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+        </a>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Add New Song</h2>
+    </div>
+    
+    <form method="POST" enctype="multipart/form-data">
+        <div class="grid grid-cols-1 gap-6">
+            <div>
+                <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="name">
+                    Song Name
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       id="name" name="name" type="text" required>
+            </div>
+            
+            <div>
+                <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="composer">
+                    Composer
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       id="composer" name="composer" type="text" required>
+            </div>
+            
+            <div>
+                <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="ragam">
+                    Ragam
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       id="ragam" name="ragam" type="text" required>
+            </div>
+            
+            <div>
+                <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="talam">
+                    Talam
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       id="talam" name="talam" type="text" required>
+            </div>
+            
+            <div>
+                <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="category">
+                    Category
+                </label>
+                <select class="shadow border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="category" name="category" required>
+                    <option value="">Select a category</option>
+                    {% for category in categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div>
+                <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="audio_file">
+                    Audio File
+                </label>
+                <div class="relative">
+                    <input class="block w-full text-sm text-gray-700 dark:text-gray-300 
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-lg file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-indigo-50 file:text-indigo-700
+                        dark:file:bg-indigo-600 dark:file:text-white
+                        hover:file:bg-indigo-100 dark:hover:file:bg-indigo-700
+                        file:cursor-pointer cursor-pointer
+                        bg-white dark:bg-gray-700 rounded-lg"
+                        id="audio_file" name="audio_file" type="file" accept="audio/*">
+                </div>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Supported formats: MP3, WAV</p>
+            </div>
+
+            <div>
+                <label class="flex items-center">
+                    <input type="checkbox" name="kalpanaswaram" class="form-checkbox h-5 w-5 text-indigo-600 dark:text-indigo-400">
+                    <span class="ml-2 text-gray-700 dark:text-gray-300">Has Kalpanaswaram Or Ragam</span>
+                </label>
+            </div>
+            
+            <div>
+                <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Add Song
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+    <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center">
+            <a href="{{ url_for('get_notations') }}" class="text-indigo-600 hover:text-indigo-800 mr-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+            </a>
+            <h2 class="text-2xl font-bold">{{ category }} Notations</h2>
+        </div>
+        {% if current_user.get_teacher_status() %}
+        <div class="flex items-center space-x-4">
+            <a href="{{ url_for('upload_notation', category=category) }}" 
+               class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg inline-flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                Upload Notation
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if notations %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for notation in notations %}
+        <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 hover:shadow-lg transition-shadow">
+            <h3 class="text-lg font-semibold text-indigo-600">{{ notation.title }}</h3>
+            <p class="text-sm text-gray-500 mt-2">Added {{ notation.created_at.strftime('%Y-%m-%d') }}</p>
+            <div class="mt-4">
+                <a href="{{ notation.file_path }}" target="_blank" 
+                   class="inline-flex items-center text-indigo-600 hover:text-indigo-800">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h6a2 2 0 002-2V6.414A2 2 0 0016.414 5L14 2.586A2 2 0 0012.586 2H9z"></path>
+                    </svg>
+                    View Notation
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-12">
+        <p class="text-gray-500">No notations in this category yet.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %} 

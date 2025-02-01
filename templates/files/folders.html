@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+    <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Other Files</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% for category in categories %}
+        <a href="{{ url_for('get_files', category=category) }}" 
+           class="block p-6 bg-gray-100 dark:bg-gray-700 rounded-lg hover:shadow-lg transition-shadow text-center group">
+            <div class="mb-3">
+                <svg class="w-16 h-16 mx-auto text-indigo-600 dark:text-indigo-400 group-hover:text-indigo-700 dark:group-hover:text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                          d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-indigo-600 dark:text-indigo-400 group-hover:text-indigo-700 dark:group-hover:text-indigo-300">{{ category }}</h3>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 
